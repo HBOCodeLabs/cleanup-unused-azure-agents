@@ -57,4 +57,58 @@ describe('azure', () => {
             ]);
         });
     });
+
+    describe('#makeRequest', () => {
+        const { rest } = require('msw');
+        const { setupServer } = require('msw/node');
+        const server = setupServer();
+
+        before(() => {
+            server.listen({ onUnhandledRequest: 'warn' });
+        });
+
+        after(() => {
+            server.close();
+        });
+
+        beforeEach(() => {
+            azure.makeRequest.callThrough();
+            server.resetHandlers();
+        });
+
+        it('does it', async () => {
+            server.use(rest.post('https://dev.azure.com/project', (req, res, ctx) => {
+                expect(req.url.href).to.equal('https://dev.azure.com/project');
+                expect(req.method).to.equal('POST');
+                expect(req.headers.map.authorization).to.equal('Basic user:abcd==');
+                return res(
+                    ctx.status(401),
+                    ctx.text('Redirect')
+                );
+            }));
+            return expect(
+                azure.makeRequest('https://dev.azure.com/project', 'post', 'user:abcd==')
+            ).to.be.rejectedWith(
+                Error,
+                'Status 401 Redirect'
+            );
+        });
+
+        it('does it 2', async () => {
+            server.use(rest.post('https://dev.azure.com/project', (req, res, ctx) => {
+                expect(req.url.href).to.equal('https://dev.azure.com/project');
+                expect(req.method).to.equal('POST');
+                expect(req.headers.map.authorization).to.equal('Basic user:abcd==');
+                return res(
+                    ctx.status(203)
+                );
+            }));
+            return expect(
+                azure.makeRequest('https://dev.azure.com/project', 'post', 'user:abcd==')
+            ).to.be.rejectedWith(
+                Error,
+                'Unable to access resource, please check that your API token has "Read & Manage Agent Pools" permission.'
+            );
+        });
+    });
 });

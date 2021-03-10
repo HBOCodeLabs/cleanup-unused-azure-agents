@@ -9,6 +9,8 @@
     "sywac-style-chunky": "^1.0.0"
   },
   "devDependencies": {
+    "chai-as-promised": "^7.1.1",
+    "msw": "^0.27.1",
     "mocha": "^8.3.0",
     "sinon": "^9.2.4",
     "chai": "^4.3.0",
