@@ -76,7 +76,7 @@ describe('azure', () => {
             server.resetHandlers();
         });
 
-        it('does it', async () => {
+        it('raises a generic error for status >= 400', async () => {
             server.use(rest.post('https://dev.azure.com/project', (req, res, ctx) => {
                 expect(req.url.href).to.equal('https://dev.azure.com/project');
                 expect(req.method).to.equal('POST');
@@ -94,7 +94,7 @@ describe('azure', () => {
             );
         });
 
-        it('does it 2', async () => {
+        it('returns a specific authentication error for status = 203', async () => {
             server.use(rest.post('https://dev.azure.com/project', (req, res, ctx) => {
                 expect(req.url.href).to.equal('https://dev.azure.com/project');
                 expect(req.method).to.equal('POST');
