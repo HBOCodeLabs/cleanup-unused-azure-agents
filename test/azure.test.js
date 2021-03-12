@@ -110,5 +110,19 @@ describe('azure', () => {
                 'Unable to access resource, please check that your API token has "Read & Manage Agent Pools" permission.'
             );
         });
+
+        it('returns empty object for status = 204', async () => {
+            server.use(rest.post('https://dev.azure.com/project', (req, res, ctx) => {
+                expect(req.url.href).to.equal('https://dev.azure.com/project');
+                expect(req.method).to.equal('POST');
+                expect(req.headers.map.authorization).to.equal('Basic user:abcd==');
+                return res(
+                    ctx.status(204)
+                );
+            }));
+            return expect(
+                azure.makeRequest('https://dev.azure.com/project', 'post', 'user:abcd==')
+            ).to.eventually.deep.equal({});
+        });
     });
 });
