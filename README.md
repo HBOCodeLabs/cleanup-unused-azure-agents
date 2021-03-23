@@ -44,3 +44,7 @@ npm install
 npm test
 npm run coverage
 ```
+
+## Disclaimer
+
+This is a community project that provides additional functionality for the Azure DevOps service. It is not published by, affiliated with, or endorsed by Microsoft. All trademarks are properties of their respective owners.
