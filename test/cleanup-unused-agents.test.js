@@ -3,12 +3,12 @@ const sinon = require('sinon');
 
 const logger = require('../lib/logger');
 const azure = require('../lib/azure');
-const { deleteUnusedAgents } = require('../lib/delete-unused-agents');
+const { cleanupUnusedAgents } = require('../lib/cleanup-unused-agents');
 
 const TOKEN = 'abcd0000';
 const BASE64 = Buffer.from(':abcd0000').toString('base64');
 
-describe('deleteUnusedAgents', () => {
+describe('cleanupUnusedAgents', () => {
     beforeEach(() => {
         sinon.stub(logger, 'log');
         sinon.stub(azure);
@@ -29,7 +29,7 @@ describe('deleteUnusedAgents', () => {
             { id: 1, status: 'offline' }
         ]);
 
-        await deleteUnusedAgents({ org: 'Acme', pool: ['Test Pool'], token: TOKEN, delay: 0.1 });
+        await cleanupUnusedAgents({ org: 'Acme', pool: ['Test Pool'], token: TOKEN, delay: 0.1 });
 
         expect(logger.log.args).to.deep.equal([
             ['Retrieving agents in pool Test Pool...'],
@@ -55,7 +55,7 @@ describe('deleteUnusedAgents', () => {
             { id: 1, status: 'offline' }
         ]);
 
-        await deleteUnusedAgents({ org: 'Acme', pool: ['Test Pool', 'TSFS VFS'], token: TOKEN, delay: 0.1 });
+        await cleanupUnusedAgents({ org: 'Acme', pool: ['Test Pool', 'TSFS VFS'], token: TOKEN, delay: 0.1 });
 
         expect(logger.log.args).to.deep.equal([
             ['Retrieving agents in pool Test Pool...'],
@@ -81,7 +81,7 @@ describe('deleteUnusedAgents', () => {
             { id: 1, status: 'offline' }
         ]);
 
-        await deleteUnusedAgents({ org: 'Acme', pool: ['Pool 1'], token: TOKEN, delay: 0.1 });
+        await cleanupUnusedAgents({ org: 'Acme', pool: ['Pool 1'], token: TOKEN, delay: 0.1 });
 
         expect(logger.log.args).to.deep.equal([
             ['Retrieving agents in pool Pool 1...'],
@@ -117,7 +117,7 @@ describe('deleteUnusedAgents', () => {
             { id: 4, status: 'offline' }
         ]);
 
-        await deleteUnusedAgents({ org: 'Acme', pool: ['Pool 1', 'Pool 2'], token: TOKEN, delay: 0.1 });
+        await cleanupUnusedAgents({ org: 'Acme', pool: ['Pool 1', 'Pool 2'], token: TOKEN, delay: 0.1 });
 
         expect(logger.log.args).to.deep.equal([
             ['Retrieving agents in pool Pool 1...'],
@@ -148,7 +148,7 @@ describe('deleteUnusedAgents', () => {
             { id: 1, status: 'online' }
         ]);
 
-        await deleteUnusedAgents({ org: 'Acme', pool: ['Test Pool'], token: TOKEN, delay: 0.1 });
+        await cleanupUnusedAgents({ org: 'Acme', pool: ['Test Pool'], token: TOKEN, delay: 0.1 });
 
         expect(logger.log.args).to.deep.equal([
             ['Retrieving agents in pool Test Pool...'],
@@ -171,7 +171,7 @@ describe('deleteUnusedAgents', () => {
             { id: 1, status: 'offline' }
         ]);
 
-        await deleteUnusedAgents({ org: 'Acme', pool: ['Test Pool'], token: TOKEN, delay: 0.1 });
+        await cleanupUnusedAgents({ org: 'Acme', pool: ['Test Pool'], token: TOKEN, delay: 0.1 });
 
         expect(logger.log.args).to.deep.equal([
             ['Retrieving agents in pool Test Pool...'],
@@ -192,7 +192,7 @@ describe('deleteUnusedAgents', () => {
             { id: 1, status: 'offline' }
         ]);
 
-        await deleteUnusedAgents({ org: 'Acme', pool: ['Test Pool'], token: TOKEN, delay: 0.1 });
+        await cleanupUnusedAgents({ org: 'Acme', pool: ['Test Pool'], token: TOKEN, delay: 0.1 });
 
         expect(logger.log.args).to.deep.equal([
             ['Retrieving agents in pool Test Pool...'],
@@ -213,7 +213,7 @@ describe('deleteUnusedAgents', () => {
         ]);
         azure.listAgents.onSecondCall().resolves([]);
 
-        await deleteUnusedAgents({ org: 'Acme', pool: ['Test Pool'], token: TOKEN, delay: 0.1 });
+        await cleanupUnusedAgents({ org: 'Acme', pool: ['Test Pool'], token: TOKEN, delay: 0.1 });
 
         expect(logger.log.args).to.deep.equal([
             ['Retrieving agents in pool Test Pool...'],
