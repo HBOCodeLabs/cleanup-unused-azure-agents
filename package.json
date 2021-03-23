@@ -1,7 +1,7 @@
 {
-  "name": "azure-delete-unused-agents",
-  "version": "0.1.0",
-  "description": "Delete unused agents in Azure agent pools",
+  "name": "cleanup-unused-azure-agents",
+  "version": "0.2.0",
+  "description": "Cleanup unused agents in Azure self-hosted agent pools",
   "main": "index.js",
   "dependencies": {
     "node-fetch": "^2.6.1",

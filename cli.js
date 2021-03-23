@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const sywac = require('sywac');
-const { deleteUnusedAgents } = require('.');
+const { cleanupUnusedAgents } = require('.');
 
 sywac
     .string('--org', { desc: 'organization name', required: true })
@@ -15,7 +15,7 @@ sywac
     .strict()
     .style(require('sywac-style-chunky'))
     .parseAndExit()
-    .then(argv => deleteUnusedAgents(argv))
+    .then(argv => cleanupUnusedAgents(argv))
     .catch(error => {
         console.error(error.message);
         process.exitCode = 1;

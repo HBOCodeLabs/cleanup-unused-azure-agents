@@ -1,1 +1,1 @@
-module.exports = require('./lib/delete-unused-agents');
+module.exports = require('./lib/cleanup-unused-agents');
