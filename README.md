@@ -1,6 +1,6 @@
 # cleanup-unused-azure-agents
 
-> Cleanup unused agents in self-hosted agent pools in Azure.
+> Cleanup unused agents in Azure self-hosted agent pools.
 
 ## Usage
 
