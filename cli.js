@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// Copyright (c) WarnerMedia Direct, LLC. All rights reserved. Licensed under the MIT license.
+// See the LICENSE file for license information.
+
 const sywac = require('sywac');
 const { cleanupUnusedAgents } = require('.');
 
