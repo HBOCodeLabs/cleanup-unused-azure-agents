@@ -1,3 +1,5 @@
 {
-    "file": ["./test/support/setup.js"]
+    "file": ["./test/support/setup.js"],
+    "reporter": "xunit",
+    "reporter-option": "output=junit/results.xml"
 }
