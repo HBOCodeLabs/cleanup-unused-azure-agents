@@ -1,6 +1,6 @@
 {
   "name": "cleanup-unused-azure-agents",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Cleanup unused agents in Azure self-hosted agent pools",
   "main": "index.js",
   "repository": {
