@@ -1,3 +1,6 @@
+// Copyright (c) WarnerMedia Direct, LLC. All rights reserved. Licensed under the MIT license.
+// See the LICENSE file for license information.
+
 const expect = require('chai').expect;
 const sinon = require('sinon');
 
